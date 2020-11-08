@@ -4,7 +4,7 @@ function leetspeek($str){
 
 for($i = 0; $str[$i] ; $i++)
 {
-if ($str[$i] == 'a'  || $str[$i] == 'A')
+if ($str[$i] == 'a' || $str[$i] == 'A')
  {
      $str[$i] = '4';
  }
