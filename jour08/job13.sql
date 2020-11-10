@@ -1,0 +1,1 @@
+AVG(capacite) FROM `salles` WHERE 1
