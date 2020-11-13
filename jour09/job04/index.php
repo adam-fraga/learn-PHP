@@ -3,7 +3,8 @@
         $host = 'localhost';
         $login = 'root';
         $pass = '';
-        $request = "SELECT * FROM etudiants WHERE prenom LIKE  'T%' ";
+//REQUETE SELECT TABLE ETUDIANT LES PRENOM COMMENCEANT PAR T MAJ
+        $request = "SELECT * FROM etudiants WHERE prenom LIKE 'T%' ";
 
 //Connexion Database
 $connexion =mysqli_connect($host,$login,$pass,'jour08');
@@ -19,18 +20,18 @@ echo "Connexion OK";
 $query = mysqli_query($connexion,$request);
 
 //mysqli_fetch_assoc  Récupère une ligne de résultat sous forme de tableau associatif
-$result= mysqli_fetch_assoc($query);
-$result2 = mysqli_fetch_all($query);
+
+//Recup tableau associatif pour nom des champs
+$assoc = mysqli_fetch_assoc($query);
+//recup all sauf terry deja recup par assoc, donc recup value dans assoc
+$all = mysqli_fetch_all($query);
+
+//Stockage de tab toto dans variable toto
+$toto = $all[0];
 
 
-foreach ($result as $key => $value)
-
-echo "<pre>";
-print_r($result2);
-echo "</pre>";
 
 ?>
-
 <!--HTML-->
 <!doctype html>
 <html lang="en">
@@ -43,13 +44,24 @@ echo "</pre>";
 </head>
 <body>
 <table>
-
     <tr>
-        <?php foreach ($result as $key => $value){ echo "<th> $key </th> ";}?>
+        <?php foreach ($assoc as $col => $val){ echo "<th class='style'> $col</th>";}?>
     </tr>
     <tr>
-        <?php  foreach($result2 as $key2 => $value2){ echo "<td>  </td> ";}?>
+        <?php  foreach($toto as $key => $val_toto){ echo "<td class='style'> $val_toto</td> <br> ";}?>
+    </tr>
+    <tr>
+        <?php foreach ($assoc as $key => $val_terry){ echo "<td class='style'> $val_terry </td>";} ?>
     </tr>
 </table>
 </body>
 </html>
+<!--FAST STYLE-->
+<style>
+    .style{
+        border: 2px solid black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 10px;
+    }
+</style>
