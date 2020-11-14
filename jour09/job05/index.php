@@ -20,13 +20,12 @@ echo" Connexion Success"; ?>
 <!--RECUP DATA-->
 <?php
 
-//Recup roxan associatif pour nom des champs
-$assoc = mysqli_fetch_assoc($query);
-//Recup tout les tableaux des personnes mineurs
-$mineur = mysqli_fetch_all($query);
+
+//Recup tout les tableaux des personnes mineurs sous forme associatif
+$mineur = mysqli_fetch_all($query,MYSQLI_ASSOC);
 
 echo"<pre>";
-print_r($assoc);
+print_r($mineur);
 echo"</pre>";
 
 ?>
@@ -42,22 +41,24 @@ echo"</pre>";
     <title>Document</title>
 </head>
 <body>
-<!--TABLEAU-->
+    <!--TABLEAU-->
     <table class="border">
         <tr>
-           <?php foreach ($assoc as $key => $value){echo "<th class='border' > $key </th>";}?>
+           <?php foreach ($mineur[0] as $key => $value){echo "<th class='border' > $key </th>";}?>
         </tr>
-            <?php foreach ($assoc as $key => $value){echo "<td class='border' > $value </td>";}?>
-        </tr>
-        <tr>
-        <?php foreach ($mineur[0] as $key => $value){echo "<td class='border' > $value </td>";}?>
+            <?php foreach ($mineur[0] as $key => $value){echo "<td class='border' > $value </td>";}?>
         </tr>
         <tr>
-            <?php foreach ($mineur[1] as $key => $value){echo "<td class='border' > $value </td>";}?>
+        <?php foreach ($mineur[1] as $key => $value){echo "<td class='border' > $value </td>";}?>
+        </tr>
+        <tr>
+            <?php foreach ($mineur[2] as $key => $value){echo "<td class='border' > $value </td>";}?>
         </tr>
     </table>
 </body>
 </html>
+
+
 <!--FAST STYLE-->
 <style>
 .border {
